@@ -14,7 +14,7 @@ class rectangle
 {
 public:
 		rectangle();
-		rectangle(Color8u c, int x , int y , int width, int height);
+		rectangle(ColorA c, int x , int y , int width, int height);
 		void setX(int x);
 		void setY(int y);
 		void draw();
@@ -22,7 +22,7 @@ public:
 		~rectangle(void);
 private:
 	//Defines the colors to put in the rectangle.
-	Color8u c;
+	ColorA c;
 	int x;
 	int y;
 	int width;

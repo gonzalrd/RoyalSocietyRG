@@ -47,9 +47,9 @@ private:
 	 rectangle* threeRect_;
 
 	 //colors for rectangles
-	 Color8u c;
-	Color8u c2;
-	Color8u c3;
+	ColorA8u c;
+	ColorA8u c2;
+	ColorA8u c3;
 	 //create a nodes
 	Node* one;
 	Node* two;
@@ -71,6 +71,9 @@ private:
 	void moveItemsLeft();
 	void moveItemsRight();
 
+	//satifies requirement transparency requirement.
+	void transparent();
+
 
 };
 
@@ -83,12 +86,12 @@ void RoyalSocietyRGApp::prepareSettings(Settings* settings){
 void RoyalSocietyRGApp::moveItemsDown(){
 
 	if(startx!=590 || starty!=790){
-	//startx = startx+20;
+	startx = startx+20;
 	starty = starty+20;
 	}
 
 	else{
-		//startx = 100;
+		startx = 100;
 		starty = 100;
 
 	}
@@ -99,12 +102,12 @@ void RoyalSocietyRGApp::moveItemsDown(){
 void RoyalSocietyRGApp::moveItemsUP(){
 
 		if(startx!=10|| starty!=10){
-	//startx = startx-100;
+	startx = startx-100;
 	starty = starty-100;
 	}
 
 	else{
-		//startx = 100;
+		startx = 100;
 		starty = 100;
 
 	}
@@ -129,22 +132,28 @@ void RoyalSocietyRGApp::moveItemsLeft(){
 	}
 
 	else startx = 100;
+}
 
-
+void RoyalSocietyRGApp::transparent(){
+	
+	
 }
 void RoyalSocietyRGApp::setup()
 {
 
 	//setup for text box
-		tSize = Vec2i(550,20);
+		tSize = Vec2i(590,20);
 		render();
 		help = false;
 
 	
 	//set up for rectangles
-	 c = Color8u(0, 60, 120);
-	 c2 = Color8u(30, 120, 60);
-     c3 = Color8u(150,210,210);
+	 c = ColorA(0.0f, 0.0f,0.6f, 0.4f);
+	 c2 = ColorA(0.0f, 0.2f,0.6f, 0.4f);
+     c3 = ColorA(0.0f, 0.0f,0.9f, 0.4f);
+	 //c = ColorA8u(0, 60, 120, 0);
+	 //c2 = ColorA8u(30, 120, 60,220);
+     //c3 = ColorA8u(150,210,210,220);
 	//Color8u afterC = Color8u(100,10,200);
 
 	//int start x, start y, used to draw the first rectangle.
@@ -207,7 +216,7 @@ void RoyalSocietyRGApp::update()
 {
 
 	 oneRect_ =  new rectangle(c,startx,starty,width,width);
-	 twoRect_ = new rectangle(c2,startx+20,starty+20,width+20,height+20); // need to check size, adds behinds so dont see it when it shows up. 
+	 twoRect_ = new rectangle(c2,startx+20,starty+20,width+20,height+20); 
 	 threeRect_ = new rectangle(c3,startx+40,starty+40,width+40,height+40);
 	//rectangle*aftRect_ = new rectangle(afterC, 100,100,550,550);
 
@@ -242,7 +251,7 @@ void RoyalSocietyRGApp::draw()
 	//goes through list and draws rectangle.
 
 	Node*nd = lst->sentinal_->next_;
-	
+	gl::enableAlphaBlending();
 	gl::clear(Color(0.0f,0.0f,0.0f));
 
 	while(nd!=lst->sentinal_){

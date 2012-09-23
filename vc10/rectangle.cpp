@@ -12,14 +12,14 @@ using namespace ci::app;
 
 
 rectangle::rectangle(){
-	c = Color8u(0,0,0);
+	c = ColorA(0.0f,0.0f,0.0f,0.0f);
 	x = 0;
 	y = 0;
 	width = 0;
 	height = 0;
 }
 
-rectangle::rectangle(Color8u c, int x , int y , int width, int height){
+rectangle::rectangle(ColorA c, int x , int y , int width, int height){
 	this->c = c;
 	this->x = x;
 	this->y = y;
