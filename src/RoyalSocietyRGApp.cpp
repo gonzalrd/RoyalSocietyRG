@@ -35,6 +35,12 @@ private:
 	 gl::Texture texture_font_;
 	 bool help;
 
+	 //rectangles on screen
+	 rectangle* oneRect_ ;
+	 rectangle* twoRect_  ;
+	 rectangle* threeRect_;
+
+
 //Width and height of the screen
 	static const int kAppWidth=800;
 	static const int kAppHeight=600;
@@ -42,6 +48,8 @@ private:
 
 	//list
 	List* lst;
+
+	void moveItems();
 
 
 };
@@ -60,16 +68,22 @@ void RoyalSocietyRGApp::setup()
 		help = false;
 
 	
-	//creates a rectangle
+	//set up for rectangles
 	Color8u c = Color8u(0, 60, 120);
-	Color8u c2 = Color8u(0, 120, 60);
-	Color8u c3 = Color8u(250,210,210);
+	Color8u c2 = Color8u(30, 120, 60);
+	Color8u c3 = Color8u(150,210,210);
 	Color8u afterC = Color8u(100,10,200);
 
- 	rectangle* oneRect_ =  new rectangle(c,80,85,500,500);
-	rectangle* twoRect_ = new rectangle(c2,90,90,590,490); // need to check size, adds behinds so dont see it when it shows up. 
-	rectangle* threeRect_ = new rectangle(c3,110,100,500,500);
-	rectangle*aftRect_ = new rectangle(afterC, 100,100,550,550);
+	//int start x, start y, used to draw the first rectangle.
+	 int startx = 300 ;
+	 int starty = 300 ;
+	 int width = 200;
+	 int height = 200; 
+
+ 	 oneRect_ =  new rectangle(c,startx,starty,width,width);
+	 twoRect_ = new rectangle(c2,startx+20,starty+20,width+20,height+20); // need to check size, adds behinds so dont see it when it shows up. 
+	 threeRect_ = new rectangle(c3,startx+40,starty+40,width+40,height+40);
+	//rectangle*aftRect_ = new rectangle(afterC, 100,100,550,550);
 
 	//create a nodes
 	Node* one = new Node();
@@ -81,17 +95,19 @@ void RoyalSocietyRGApp::setup()
 	one->data_= oneRect_;
 	two->data_= twoRect_;
 	three->data_= threeRect_;
-	after->data_ = aftRect_;
+	//after->data_ = aftRect_;
 
 	//creates a list
 	lst =  new List();
 
 	//adds node
 
-	lst->add(one);
-	lst->add(two);
 	lst->add(three);
-	lst->insertAfter(two,after);
+	lst->add(two);
+	lst->add(one);
+	
+	
+	//lst->insertAfter(two,after);
 
 }
 
