@@ -74,7 +74,7 @@ void List::reverse(){
 		mov->next_ = mov->prev_;
 		mov->prev_ = temp;
 
-
+		   
 		mov = mov->prev_;
 
 	} while(mov!=sentinal_);
