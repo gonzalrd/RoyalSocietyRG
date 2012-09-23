@@ -72,6 +72,7 @@ private:
 	void moveItemsRight();
 
 	//satifies requirement transparency requirement.
+	float T;
 	void transparent();
 
 
@@ -136,27 +137,24 @@ void RoyalSocietyRGApp::moveItemsLeft(){
 
 void RoyalSocietyRGApp::transparent(){
 	
-	
+	if(T>0){
+		T= T-0.2;
+	}
+	else{
+		T=1;
+	}
 }
 void RoyalSocietyRGApp::setup()
 {
 
 	//setup for text box
-		tSize = Vec2i(590,20);
+		tSize = Vec2i(600,30);
 		render();
 		help = false;
 
 	
 	//set up for rectangles
-	 c = ColorA(0.0f, 0.0f,0.6f, 0.4f);
-	 c2 = ColorA(0.0f, 0.2f,0.6f, 0.4f);
-     c3 = ColorA(0.0f, 0.0f,0.9f, 0.4f);
-	 //c = ColorA8u(0, 60, 120, 0);
-	 //c2 = ColorA8u(30, 120, 60,220);
-     //c3 = ColorA8u(150,210,210,220);
-	//Color8u afterC = Color8u(100,10,200);
-
-	//int start x, start y, used to draw the first rectangle.
+	  T=1;
 	  startx = 300 ;
 	  starty = 300 ;
 	  width = 200;
@@ -170,10 +168,10 @@ void RoyalSocietyRGApp::setup()
 //satifies requirement 
 void RoyalSocietyRGApp::render(){
 
-	Font ft  = Font("Times new roman",25);
-	string ms = " Press the up arrow to reverse, Press down arrow to move down and Up arrow to move up.";
+	Font ft  = Font("Times new roman",20);
+	string ms = "Press the up arrow to move Up, down arrow to move down,left to move left, right to move right and T to increase transparency";
 	TextBox tbox = TextBox().alignment( TextBox::CENTER ).font(ft).size( tSize.x, tSize.y ).text( ms );
-	tbox.setColor( Color( 0.0f, 0.65f, 1.0f ) );
+	tbox.setColor( Color( 0.0f, 0.85f, 1.0f ) );
 	tbox.setBackgroundColor( ColorA( 0.5, 0, 0, 1 ) );
 	Vec2i sz = tbox.measure();
 	console() << "Height: " << sz.y << endl;
@@ -186,8 +184,8 @@ void RoyalSocietyRGApp::keyDown(KeyEvent event){
 	 if(event.getChar() == '?'){//got the idea from ajduberstien
 		help = true;
 	}
-	 else if(event.getCode() == event.KEY_r){
-		 lst->reverse();
+	 else if(event.getCode() == event.KEY_t){
+		 transparent();
 	}
 	else if( event.getCode() == event.KEY_UP ){
 		   moveItemsUP();
@@ -214,6 +212,9 @@ void RoyalSocietyRGApp::mouseDown( MouseEvent event )
 
 void RoyalSocietyRGApp::update()
 {
+	 c = ColorA(0.0f, 0.0f,0.6f, T);
+	 c2 = ColorA(0.0f, 0.2f,0.6f, T);
+     c3 = ColorA(0.0f, 0.0f,0.9f, T);
 
 	 oneRect_ =  new rectangle(c,startx,starty,width,width);
 	 twoRect_ = new rectangle(c2,startx+20,starty+20,width+20,height+20); 
