@@ -7,6 +7,8 @@
 #include "../vc10/rectangle.h"
 #include "../vc10/List.h"
 #include "../vc10/Node.h"
+#include "cinder/Font.h"
+#include "cinder/Text.h"
 
 using namespace ci;
 using namespace ci::app;
@@ -19,11 +21,17 @@ class RoyalSocietyRGApp : public AppBasic {
 	void mouseDown( MouseEvent event );	
 	void update();
 	void prepareSettings(Settings* settings);
+	void dishelp();
 	void draw();
+	
 
 	
 private:
 
+	
+	 Font master_font_;
+	 int color_changer_;
+	 gl::Texture master_texture_font_;
 //Width and height of the screen
 	static const int kAppWidth=800;
 	static const int kAppHeight=600;
@@ -42,7 +50,7 @@ void RoyalSocietyRGApp::prepareSettings(Settings* settings){
 
 void RoyalSocietyRGApp::setup()
 {
-
+	
 	//creates a rectangle
 	Color8u c = Color8u(0, 60, 120);
 	Color8u c2 = Color8u(0, 120, 60);
@@ -78,10 +86,26 @@ void RoyalSocietyRGApp::setup()
 
 }
 
+//Learned to do from abj
+void RoyalSocietyRGApp::dishelp(){
+
+	Font ft  = Font("Helvetica",32);
+	string ms = " Press the up arrow to reverse.";
+	TextBox tbox = TextBox().alignment( TextBox::CENTER ).font(ft).size( Vec2i( 512, 511) ).text( ms );
+	tbox.setColor( Color( 1.0f, 0.65f, 0.35f ) );
+	tbox.setBackgroundColor( ColorA( 0.5, 0, 0, 1 ) );
+	gl::Texture( tbox.render() );
+
+
+}
+
 void RoyalSocietyRGApp::keyDown(KeyEvent event){
-	if( event.KEY_UP ){
+	if( event.getCode() == event.KEY_UP ){
 		   lst->reverse();
 		} 
+	else if(event.getCode() ==event.KEY_QUESTION){
+		dishelp();
+	}
 
 }
 

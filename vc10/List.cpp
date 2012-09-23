@@ -73,8 +73,11 @@ void List::reverse(){
 		Node*temp = mov->next_;
 		mov->next_ = mov->prev_;
 		mov->prev_ = temp;
+
+
 		mov = mov->prev_;
 
 	} while(mov!=sentinal_);
 
+	
 }
