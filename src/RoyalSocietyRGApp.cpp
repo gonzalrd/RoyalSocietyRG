@@ -68,6 +68,8 @@ private:
 	//satifies the move items requirment 1.F
 	void moveItemsDown();
 	void moveItemsUP();
+	void moveItemsLeft();
+	void moveItemsRight();
 
 
 };
@@ -80,22 +82,56 @@ void RoyalSocietyRGApp::prepareSettings(Settings* settings){
 //satifies project requirement 1.f
 void RoyalSocietyRGApp::moveItemsDown(){
 
-
-	startx = startx+20;
+	if(startx!=590 || starty!=790){
+	//startx = startx+20;
 	starty = starty+20;
+	}
 
+	else{
+		//startx = 100;
+		starty = 100;
+
+	}
 	
 }
 
 //satifies project requirement 1.f
 void RoyalSocietyRGApp::moveItemsUP(){
 
-	startx = startx-100;
+		if(startx!=10|| starty!=10){
+	//startx = startx-100;
 	starty = starty-100;
+	}
 
+	else{
+		//startx = 100;
+		starty = 100;
+
+	}
 
 }
 
+void RoyalSocietyRGApp::moveItemsRight(){
+
+	if(startx!= 590){
+	startx= startx+20;
+	}
+
+	else startx = 100;
+	
+}
+
+//satifies project requirement 1.f
+void RoyalSocietyRGApp::moveItemsLeft(){
+
+	if(startx!= 60){
+	startx= startx-100;
+	}
+
+	else startx = 100;
+
+
+}
 void RoyalSocietyRGApp::setup()
 {
 
@@ -122,10 +158,11 @@ void RoyalSocietyRGApp::setup()
 }
 
 //Learned to do from ajduberstien and the cinder samples Textbox and TextTest
+//satifies requirement 
 void RoyalSocietyRGApp::render(){
 
 	Font ft  = Font("Times new roman",25);
-	string ms = " Press the up arrow to reverse, Press down arrow to move";
+	string ms = " Press the up arrow to reverse, Press down arrow to move down and Up arrow to move up.";
 	TextBox tbox = TextBox().alignment( TextBox::CENTER ).font(ft).size( tSize.x, tSize.y ).text( ms );
 	tbox.setColor( Color( 0.0f, 0.65f, 1.0f ) );
 	tbox.setBackgroundColor( ColorA( 0.5, 0, 0, 1 ) );
@@ -140,11 +177,20 @@ void RoyalSocietyRGApp::keyDown(KeyEvent event){
 	 if(event.getChar() == '?'){//got the idea from ajduberstien
 		help = true;
 	}
+	 else if(event.getCode() == event.KEY_r){
+		 lst->reverse();
+	}
 	else if( event.getCode() == event.KEY_UP ){
 		   moveItemsUP();
 		} 
 	else if( event.getCode() == event.KEY_DOWN ){
 		  	moveItemsDown();
+		} 
+	else if( event.getCode() == event.KEY_RIGHT ){
+		  	moveItemsRight();
+		} 
+	else if( event.getCode() == event.KEY_LEFT ){
+		  	moveItemsLeft();
 		} 
 		} 
 	
