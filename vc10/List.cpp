@@ -65,4 +65,14 @@ void List::insertAfter(Node*where, Node*nw){
 	}
 
 
+void List::reverse(){
 
+	Node*mov = sentinal_->next_; 
+
+	do{
+		Node*temp = mov->next_;
+		mov->next_ = mov->prev_;
+		mov->prev_ = temp;
+		mov = mov->prev_;
+	} while(mov!=sentinal_);
+}

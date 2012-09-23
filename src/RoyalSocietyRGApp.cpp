@@ -79,6 +79,8 @@ void RoyalSocietyRGApp::setup()
 
 void RoyalSocietyRGApp::mouseDown( MouseEvent event )
 {
+
+	lst->reverse();
 }
 
 void RoyalSocietyRGApp::update()

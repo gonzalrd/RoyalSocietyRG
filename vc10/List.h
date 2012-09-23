@@ -15,6 +15,7 @@ public:
 	~List(void);
 	void add(Node* toAdd);
 	void remove(Node*toRemov);
+	void reverse();
 	void insertAfter(Node*where, Node*nw);//include the  data of the next node
 	void insertBefore(Node*where);//include the data to put in the next node here
 
