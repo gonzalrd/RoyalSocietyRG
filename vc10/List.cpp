@@ -81,3 +81,9 @@ void List::reverse(){
 
 	
 }
+
+void List::remove(Node*toRemov){
+	
+
+
+}
