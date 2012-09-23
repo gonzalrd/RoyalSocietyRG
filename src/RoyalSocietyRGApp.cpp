@@ -66,7 +66,8 @@ private:
 	List* lst;
 
 	//satifies the move items requirment 1.F
-	void moveItems();
+	void moveItemsDown();
+	void moveItemsUP();
 
 
 };
@@ -76,10 +77,22 @@ void RoyalSocietyRGApp::prepareSettings(Settings* settings){
 	(*settings).setResizable(false);
 }
 
-void RoyalSocietyRGApp::moveItems(){
+//satifies project requirement 1.f
+void RoyalSocietyRGApp::moveItemsDown(){
+
 
 	startx = startx+20;
 	starty = starty+20;
+
+	
+}
+
+//satifies project requirement 1.f
+void RoyalSocietyRGApp::moveItemsUP(){
+
+	startx = startx-100;
+	starty = starty-100;
+
 
 }
 
@@ -112,7 +125,7 @@ void RoyalSocietyRGApp::setup()
 void RoyalSocietyRGApp::render(){
 
 	Font ft  = Font("Times new roman",25);
-	string ms = " Press the up arrow to reverse.";
+	string ms = " Press the up arrow to reverse, Press down arrow to move";
 	TextBox tbox = TextBox().alignment( TextBox::CENTER ).font(ft).size( tSize.x, tSize.y ).text( ms );
 	tbox.setColor( Color( 0.0f, 0.65f, 1.0f ) );
 	tbox.setBackgroundColor( ColorA( 0.5, 0, 0, 1 ) );
@@ -128,10 +141,10 @@ void RoyalSocietyRGApp::keyDown(KeyEvent event){
 		help = true;
 	}
 	else if( event.getCode() == event.KEY_UP ){
-		   lst->reverse();
+		   moveItemsUP();
 		} 
 	else if( event.getCode() == event.KEY_DOWN ){
-		  	
+		  	moveItemsDown();
 		} 
 		} 
 	
@@ -141,7 +154,7 @@ void RoyalSocietyRGApp::keyDown(KeyEvent event){
 
 void RoyalSocietyRGApp::mouseDown( MouseEvent event )
 {
-	moveItems();
+	
 }
 
 void RoyalSocietyRGApp::update()
@@ -173,6 +186,8 @@ void RoyalSocietyRGApp::update()
 	lst->add(three);
 	lst->add(two);
 	lst->add(one);
+
+	
 }
 
 
@@ -182,6 +197,8 @@ void RoyalSocietyRGApp::draw()
 
 	Node*nd = lst->sentinal_->next_;
 	
+	gl::clear(Color(0.0f,0.0f,0.0f));
+
 	while(nd!=lst->sentinal_){
 		nd->data_->draw();
 		nd= nd->next_;
