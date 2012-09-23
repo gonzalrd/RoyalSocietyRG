@@ -37,7 +37,6 @@ void rectangle::setY(int y){
 }
 
 void rectangle::draw(){
-
 	//red then blue then green
 	gl::color(c);
 	gl::drawSolidRect(Rectf(x,y,width,height) , false);

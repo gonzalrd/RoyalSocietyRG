@@ -78,10 +78,8 @@ void RoyalSocietyRGApp::prepareSettings(Settings* settings){
 
 void RoyalSocietyRGApp::moveItems(){
 
-	oneRect_->setX(startx + 200);
-	one->data_ = oneRect_;
-	
-	
+	startx = startx+20;
+	starty = starty+20;
 
 }
 
@@ -186,7 +184,6 @@ void RoyalSocietyRGApp::draw()
 	
 	while(nd!=lst->sentinal_){
 		nd->data_->draw();
-
 		nd= nd->next_;
 	}
 
