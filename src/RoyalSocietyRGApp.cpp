@@ -35,10 +35,26 @@ private:
 	 gl::Texture texture_font_;
 	 bool help;
 
+	 //dimensions for rectangles
+	 int startx;
+	 int starty;
+	 int width ;
+	 int height ;
+
 	 //rectangles on screen
 	 rectangle* oneRect_ ;
 	 rectangle* twoRect_  ;
 	 rectangle* threeRect_;
+
+	 //colors for rectangles
+	 Color8u c;
+	Color8u c2;
+	Color8u c3;
+	 //create a nodes
+	Node* one;
+	Node* two;
+	Node* three;
+	Node* after;
 
 
 //Width and height of the screen
@@ -49,6 +65,7 @@ private:
 	//list
 	List* lst;
 
+	//satifies the move items requirment 1.F
 	void moveItems();
 
 
@@ -57,6 +74,15 @@ private:
 void RoyalSocietyRGApp::prepareSettings(Settings* settings){
 	(*settings).setWindowSize(kAppWidth,kAppHeight);
 	(*settings).setResizable(false);
+}
+
+void RoyalSocietyRGApp::moveItems(){
+
+	oneRect_->setX(startx + 200);
+	one->data_ = oneRect_;
+	
+	
+
 }
 
 void RoyalSocietyRGApp::setup()
@@ -69,45 +95,18 @@ void RoyalSocietyRGApp::setup()
 
 	
 	//set up for rectangles
-	Color8u c = Color8u(0, 60, 120);
-	Color8u c2 = Color8u(30, 120, 60);
-	Color8u c3 = Color8u(150,210,210);
-	Color8u afterC = Color8u(100,10,200);
+	 c = Color8u(0, 60, 120);
+	 c2 = Color8u(30, 120, 60);
+     c3 = Color8u(150,210,210);
+	//Color8u afterC = Color8u(100,10,200);
 
 	//int start x, start y, used to draw the first rectangle.
-	 int startx = 300 ;
-	 int starty = 300 ;
-	 int width = 200;
-	 int height = 200; 
+	  startx = 300 ;
+	  starty = 300 ;
+	  width = 200;
+	  height = 200; 
 
- 	 oneRect_ =  new rectangle(c,startx,starty,width,width);
-	 twoRect_ = new rectangle(c2,startx+20,starty+20,width+20,height+20); // need to check size, adds behinds so dont see it when it shows up. 
-	 threeRect_ = new rectangle(c3,startx+40,starty+40,width+40,height+40);
-	//rectangle*aftRect_ = new rectangle(afterC, 100,100,550,550);
-
-	//create a nodes
-	Node* one = new Node();
-	Node* two = new Node();
-	Node* three = new Node();
-	Node* after = new Node();
-
-	//adds rectangles two nodes
-	one->data_= oneRect_;
-	two->data_= twoRect_;
-	three->data_= threeRect_;
-	//after->data_ = aftRect_;
-
-	//creates a list
-	lst =  new List();
-
-	//adds node
-
-	lst->add(three);
-	lst->add(two);
-	lst->add(one);
-	
-	
-	//lst->insertAfter(two,after);
+ 	
 
 }
 
@@ -133,19 +132,49 @@ void RoyalSocietyRGApp::keyDown(KeyEvent event){
 	else if( event.getCode() == event.KEY_UP ){
 		   lst->reverse();
 		} 
+	else if( event.getCode() == event.KEY_DOWN ){
+		  	
+		} 
+		} 
 	
 	
 
-}
+
 
 void RoyalSocietyRGApp::mouseDown( MouseEvent event )
 {
-
+	moveItems();
 }
 
 void RoyalSocietyRGApp::update()
 {
+
+	 oneRect_ =  new rectangle(c,startx,starty,width,width);
+	 twoRect_ = new rectangle(c2,startx+20,starty+20,width+20,height+20); // need to check size, adds behinds so dont see it when it shows up. 
+	 threeRect_ = new rectangle(c3,startx+40,starty+40,width+40,height+40);
+	//rectangle*aftRect_ = new rectangle(afterC, 100,100,550,550);
+
+	//create a nodes
+	 one = new Node();
+	 two = new Node();
+	 three = new Node();
+	// after = new Node();
+
+	//adds rectangles two nodes
+	one->data_= oneRect_;
+	two->data_= twoRect_;
+	three->data_= threeRect_;
+	//after->data_ = aftRect_;
+
+	//creates a list
+	lst =  new List();
+
+	//adds node
+
 	
+	lst->add(three);
+	lst->add(two);
+	lst->add(one);
 }
 
 

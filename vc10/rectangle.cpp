@@ -28,6 +28,13 @@ rectangle::rectangle(Color8u c, int x , int y , int width, int height){
 	
 }
 
+void rectangle::setX(int x){
+	this->x = x;
+}
+
+void rectangle::setY(int y){
+	this->y = y;
+}
 
 void rectangle::draw(){
 

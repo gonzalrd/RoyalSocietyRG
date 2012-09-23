@@ -15,6 +15,8 @@ class rectangle
 public:
 		rectangle();
 		rectangle(Color8u c, int x , int y , int width, int height);
+		void setX(int x);
+		void setY(int y);
 		void draw();
 
 		~rectangle(void);
