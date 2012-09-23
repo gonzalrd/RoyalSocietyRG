@@ -64,7 +64,7 @@ void List::insertAfter(Node*where, Node*nw){
 
 	}
 
-
+//Satifies requirement 
 void List::reverse(){
 
 	Node*mov = sentinal_->next_; 
@@ -74,5 +74,7 @@ void List::reverse(){
 		mov->next_ = mov->prev_;
 		mov->prev_ = temp;
 		mov = mov->prev_;
+
 	} while(mov!=sentinal_);
+
 }

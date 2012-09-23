@@ -15,6 +15,7 @@ using namespace std;
 class RoyalSocietyRGApp : public AppBasic {
   public:
 	void setup();
+	void keyDown(KeyEvent event);
 	void mouseDown( MouseEvent event );	
 	void update();
 	void prepareSettings(Settings* settings);
@@ -47,7 +48,7 @@ void RoyalSocietyRGApp::setup()
 	Color8u c2 = Color8u(0, 120, 60);
 	Color8u c3 = Color8u(250,210,210);
 	Color8u afterC = Color8u(100,10,200);
- 	oneRect_ = new rectangle(c,200,300,400,500);
+ 	oneRect_ = new rectangle(c,80,85,400,500);
 
 	rectangle* twoRect_ = new rectangle(c2,70,90,590,490); // need to check size, adds behinds so dont see it when it shows up. 
 	rectangle* threeRect_ = new rectangle(c3,60,50,500,500);
@@ -77,15 +78,23 @@ void RoyalSocietyRGApp::setup()
 
 }
 
+void RoyalSocietyRGApp::keyDown(KeyEvent event){
+	if( event.KEY_UP ){
+		   lst->reverse();
+		} 
+
+}
+
 void RoyalSocietyRGApp::mouseDown( MouseEvent event )
 {
 
-	lst->reverse();
 }
 
 void RoyalSocietyRGApp::update()
 {
+	
 }
+
 
 void RoyalSocietyRGApp::draw()
 {
