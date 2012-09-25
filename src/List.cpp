@@ -16,37 +16,18 @@ List::List()
 {
 	num_items = 0;
 	sentinal_ = new Node();
+	sentinal_ ->prev_ = sentinal_->next_ = sentinal_;
 }
 
 //Adds a node at the end of the list right before it reaches the sentinal again.
 void List::add(Node* toAdd){
 
-	//condition that nothing is currently in the list.
-	if(num_items ==0){
-		sentinal_->next_ = toAdd;
-		sentinal_->prev_ = toAdd;
+	toAdd -> prev_ = sentinal_-> prev_;
+	sentinal_->prev_ = toAdd;
+	toAdd -> next_ = sentinal_;
+	toAdd -> prev_ ->next_ = toAdd;
 
-		//the nodes toAdd pointers go to sential because its currently the only item in the list
-		toAdd->next_ = sentinal_;
-		toAdd->prev_ = sentinal_;
-
-		num_items += 1;
-	}
-
-	else{
-		
-		//sets the next pointers to the correct node.
-		Node*temp = sentinal_->next_;
-		sentinal_->next_ = toAdd;
-		toAdd->next_ = temp;
-		
-		//set the prev pointers to the correct node.
-		temp->prev_ = toAdd;
-		toAdd->prev_ = sentinal_;
-
-		num_items +=1;
-	}
-
+	num_items +=1;
 }
 
 //inserts a new node named nw after the nw node.

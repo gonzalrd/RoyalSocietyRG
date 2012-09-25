@@ -72,7 +72,7 @@ private:
 	void moveItemsRight();
 
 	//satifies requirement transparency requirement.
-	float T;
+	float tranparency;
 	void transparent();
 
 
@@ -93,7 +93,7 @@ void RoyalSocietyRGApp::setup()
 
 	
 	//set up for rectangles
-	  T=1;
+	tranparency=1;
 	  startx = 300 ;
 	  starty = 300 ;
 	  width = 200;
@@ -133,11 +133,11 @@ void RoyalSocietyRGApp::moveItemsLeft(){
 
 void RoyalSocietyRGApp::transparent(){
 	
-	if(T>0){
-		T= T-0.2;
+	if(tranparency>0){
+		tranparency= tranparency-0.2;
 	}
 	else{
-		T=1;
+		tranparency=1;
 	}
 }
 
@@ -189,9 +189,9 @@ void RoyalSocietyRGApp::mouseDown( MouseEvent event )
 
 void RoyalSocietyRGApp::update()
 {
-	 c = ColorA(0.0f, 0.0f,0.6f, T);
-	 c2 = ColorA(0.0f, 0.2f,0.6f, T);
-     c3 = ColorA(0.0f, 0.0f,0.9f, T);
+	 c = ColorA(0.0f, 0.0f,0.6f, tranparency);
+	 c2 = ColorA(0.0f, 0.2f,0.6f, tranparency);
+     c3 = ColorA(0.0f, 0.0f,0.9f, tranparency);
 
 	 oneRect_ =  new rectangle(c,startx,starty,width,width);
 	 twoRect_ = new rectangle(c2,startx+20,starty+20,width+20,height+20); 
