@@ -179,7 +179,7 @@ void RoyalSocietyRGApp::render(){
 
 void RoyalSocietyRGApp::keyDown(KeyEvent event){
 	 if(event.getChar() == '?'){//got the idea from ajduberstien
-		help = true;
+		help = !help;
 	}
 	 else if(event.getCode() == event.KEY_t){
 		 transparent();
