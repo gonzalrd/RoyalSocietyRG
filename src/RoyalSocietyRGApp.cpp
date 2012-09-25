@@ -82,6 +82,23 @@ void RoyalSocietyRGApp::prepareSettings(Settings* settings){
 	(*settings).setResizable(false);
 }
 
+void RoyalSocietyRGApp::setup()
+{
+
+	//setup for text box
+		tSize = Vec2i(600,30);
+		render();
+		help = true;
+
+	
+	//set up for rectangles
+	  T=1;
+	  startx = 300 ;
+	  starty = 300 ;
+	  width = 200;
+	  height = 200; 
+
+}
 //satifies project requirement 1.f
 void RoyalSocietyRGApp::moveItemsDown(){
 
@@ -142,25 +159,6 @@ void RoyalSocietyRGApp::transparent(){
 	else{
 		T=1;
 	}
-}
-void RoyalSocietyRGApp::setup()
-{
-
-	//setup for text box
-		tSize = Vec2i(600,30);
-		render();
-		help = false;
-
-	
-	//set up for rectangles
-	  T=1;
-	  startx = 300 ;
-	  starty = 300 ;
-	  width = 200;
-	  height = 200; 
-
- 	
-
 }
 
 //Learned to do from ajduberstien and the cinder samples Textbox and TextTest
