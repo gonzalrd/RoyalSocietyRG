@@ -60,6 +60,7 @@ private:
 //Width and height of the screen
 	static const int kAppWidth=800;
 	static const int kAppHeight=600;
+	static const int kRectIncrement=50;
 
 	//list
 	List* lst;
@@ -102,53 +103,32 @@ void RoyalSocietyRGApp::setup()
 //satifies project requirement 1.f
 void RoyalSocietyRGApp::moveItemsDown(){
 
-	if(startx!=590 || starty!=790){
-	startx = startx+20;
-	starty = starty+20;
-	}
-
-	else{
-		startx = 100;
-		starty = 100;
-
-	}
-	
+	if(starty+kRectIncrement<kAppHeight){
+	starty = starty+kRectIncrement;
+	}	
 }
 
 //satifies project requirement 1.f
 void RoyalSocietyRGApp::moveItemsUP(){
 
-		if(startx!=10|| starty!=10){
-	startx = startx-100;
-	starty = starty-100;
+		if(starty-kRectIncrement>0){
+	starty = starty-kRectIncrement;
 	}
-
-	else{
-		startx = 100;
-		starty = 100;
-
-	}
-
 }
 
 void RoyalSocietyRGApp::moveItemsRight(){
 
-	if(startx!= 590){
-	startx= startx+20;
-	}
-
-	else startx = 100;
-	
+	if(startx+kRectIncrement<kAppWidth){
+	startx= startx+kRectIncrement;
+	}	
 }
 
 //satifies project requirement 1.f
 void RoyalSocietyRGApp::moveItemsLeft(){
 
-	if(startx!= 60){
-	startx= startx-100;
+	if(startx-kRectIncrement>0){
+	startx= startx-kRectIncrement;
 	}
-
-	else startx = 100;
 }
 
 void RoyalSocietyRGApp::transparent(){
