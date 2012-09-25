@@ -33,34 +33,25 @@ void List::add(Node* toAdd){
 //inserts a new node named nw after the nw node.
 void List::insertAfter(Node*where, Node*nw){
 
-	Node*temp = where->next_;
-	//sets the next pointers
-	nw->next_ = where->next_;
-	where->next_ = nw;
+	nw ->next_ = where->next_;
+	where ->next_ = nw;
 
-	//sets the prev pointers
-	temp->prev_ = nw;
-	nw->prev_ = where;
-
-
+	nw -> prev_ = where;
+	nw -> next_ ->prev_ = nw;
 	}
 
 //Satifies requirement 
 void List::reverse(){
 
-	Node*mov = sentinal_->next_; 
+	Node* temp = sentinal_;
+	Node* temp2 = NULL;
 
 	do{
-		Node*temp = mov->next_;
-		mov->next_ = mov->prev_;
-		mov->prev_ = temp;
-
-		   
-		mov = mov->prev_;
-
-	} while(mov!=sentinal_);
-
-	
+		temp2 = temp->next_;
+		temp->next_ = temp->prev_;
+		temp->prev_ = temp2;
+		temp = temp2;
+	}while(temp!=sentinal_);
 }
 
 void List::remove(Node*toRemov){

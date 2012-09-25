@@ -175,7 +175,11 @@ void RoyalSocietyRGApp::keyDown(KeyEvent event){
 		} 
 	else if( event.getCode() == event.KEY_LEFT ){
 		  	moveItemsLeft();
-		} 
+		}
+	else if( event.getCode() == event.KEY_r){
+
+		(*lst).reverse();
+	}
 		} 
 	
 	
@@ -203,24 +207,22 @@ void RoyalSocietyRGApp::update()
 	 two = new Node();
 	 three = new Node();
 	// after = new Node();
-
+	// console() << one << " " << two << " " << three <<endl;
 	//adds rectangles two nodes
 	one->data_= oneRect_;
 	two->data_= twoRect_;
 	three->data_= threeRect_;
 	//after->data_ = aftRect_;
 
-	//creates a list
-	lst =  new List();
 
 	//adds node
 
-	
+	//creates a list
+	lst =  new List();
+
 	lst->add(three);
 	lst->add(two);
 	lst->add(one);
-
-	
 }
 
 
@@ -240,7 +242,6 @@ void RoyalSocietyRGApp::draw()
 	if(help == true){
 		gl::draw(texture_font_);
 	}
-
 }
 
 CINDER_APP_BASIC( RoyalSocietyRGApp, RendererGl )
