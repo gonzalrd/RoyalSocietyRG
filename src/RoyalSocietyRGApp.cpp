@@ -4,9 +4,9 @@
 #include "cinder/ImageIo.h"
 #include "cinder/Surface.h"
 #include "cinder/rect.h"
-#include "../vc10/rectangle.h"
-#include "../vc10/List.h"
-#include "../vc10/Node.h"
+#include "rectangle.h"
+#include "List.h"
+#include "Node.h"
 #include "cinder/Font.h"
 #include "cinder/Text.h"
 #include <vector>
@@ -60,7 +60,6 @@ private:
 //Width and height of the screen
 	static const int kAppWidth=800;
 	static const int kAppHeight=600;
-	static const int kTextureSize=1024;
 
 	//list
 	List* lst;
