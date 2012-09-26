@@ -1,15 +1,4 @@
-#include "cinder/app/AppBasic.h"
-#include "cinder/gl/gl.h"
-#include "cinder/gl/Texture.h"
-#include "cinder/ImageIo.h"
-#include "cinder/Surface.h"
-#include "cinder/rect.h"
-#include "rectangle.h"
-#include "Node.h"
 #include "List.h"
-
-
-
 
 //contructor for the list. creates an empty list only containing the sentinal.
 List::List()
@@ -54,8 +43,8 @@ void List::reverse(){
 	}while(temp!=sentinal_);
 }
 
-void List::remove(Node*toRemov){
-	
-
-
+void List::remove(Node*toRemove){
+	delete toRemove->data_;
+	delete toRemove;
+	num_items--;
 }

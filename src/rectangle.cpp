@@ -1,9 +1,3 @@
-#include "cinder/app/AppBasic.h"
-#include "cinder/gl/gl.h"
-#include "cinder/gl/Texture.h"
-#include "cinder/ImageIo.h"
-#include "cinder/Surface.h"
-#include "cinder/rect.h"
 #include "rectangle.h"
 
 using namespace std;
