@@ -1,8 +1,5 @@
 #include "cinder/app/AppBasic.h"
 #include "cinder/gl/gl.h"
-#include "cinder/gl/Texture.h"
-#include "cinder/ImageIo.h"
-#include "cinder/Surface.h"
 #include "cinder/rect.h"
 #include "rectangle.h"
 #include "Node.h"
@@ -12,7 +9,6 @@ class List
 {
 public:
 	List();
-	~List(void);
 	void add(Node* toAdd);
 	void remove(Node*toRemov);
 	void reverse();
@@ -25,6 +21,5 @@ private:
 	//Node*sentinal_;
 	int num_items;
 	int index;
-	
 };
 
