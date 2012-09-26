@@ -4,9 +4,9 @@
 #include "cinder/ImageIo.h"
 #include "cinder/Surface.h"
 #include "cinder/rect.h"
-#include "../vc10/rectangle.h"
-#include "../vc10/List.h"
-#include "../vc10/Node.h"
+#include "rectangle.h"
+#include "List.h"
+#include "Node.h"
 #include "cinder/Font.h"
 #include "cinder/Text.h"
 #include <vector>
@@ -60,7 +60,7 @@ private:
 //Width and height of the screen
 	static const int kAppWidth=800;
 	static const int kAppHeight=600;
-	static const int kTextureSize=1024;
+	static const int kRectIncrement=50;
 
 	//list
 	List* lst;
@@ -72,7 +72,7 @@ private:
 	void moveItemsRight();
 
 	//satifies requirement transparency requirement.
-	float T;
+	float tranparency;
 	void transparent();
 
 
@@ -83,85 +83,62 @@ void RoyalSocietyRGApp::prepareSettings(Settings* settings){
 	(*settings).setResizable(false);
 }
 
-//satifies project requirement 1.f
-void RoyalSocietyRGApp::moveItemsDown(){
-
-	if(startx!=590 || starty!=790){
-	startx = startx+20;
-	starty = starty+20;
-	}
-
-	else{
-		startx = 100;
-		starty = 100;
-
-	}
-	
-}
-
-//satifies project requirement 1.f
-void RoyalSocietyRGApp::moveItemsUP(){
-
-		if(startx!=10|| starty!=10){
-	startx = startx-100;
-	starty = starty-100;
-	}
-
-	else{
-		startx = 100;
-		starty = 100;
-
-	}
-
-}
-
-void RoyalSocietyRGApp::moveItemsRight(){
-
-	if(startx!= 590){
-	startx= startx+20;
-	}
-
-	else startx = 100;
-	
-}
-
-//satifies project requirement 1.f
-void RoyalSocietyRGApp::moveItemsLeft(){
-
-	if(startx!= 60){
-	startx= startx-100;
-	}
-
-	else startx = 100;
-}
-
-void RoyalSocietyRGApp::transparent(){
-	
-	if(T>0){
-		T= T-0.2;
-	}
-	else{
-		T=1;
-	}
-}
 void RoyalSocietyRGApp::setup()
 {
 
 	//setup for text box
 		tSize = Vec2i(600,30);
 		render();
-		help = false;
+		help = true;
 
 	
 	//set up for rectangles
-	  T=1;
+	tranparency=1;
 	  startx = 300 ;
 	  starty = 300 ;
 	  width = 200;
 	  height = 200; 
 
- 	
+}
+//satifies project requirement 1.f
+void RoyalSocietyRGApp::moveItemsDown(){
 
+	if(starty+kRectIncrement<kAppHeight){
+	starty = starty+kRectIncrement;
+	}	
+}
+
+//satifies project requirement 1.f
+void RoyalSocietyRGApp::moveItemsUP(){
+
+		if(starty-kRectIncrement>0){
+	starty = starty-kRectIncrement;
+	}
+}
+
+void RoyalSocietyRGApp::moveItemsRight(){
+
+	if(startx+kRectIncrement<kAppWidth){
+	startx= startx+kRectIncrement;
+	}	
+}
+
+//satifies project requirement 1.f
+void RoyalSocietyRGApp::moveItemsLeft(){
+
+	if(startx-kRectIncrement>0){
+	startx= startx-kRectIncrement;
+	}
+}
+
+void RoyalSocietyRGApp::transparent(){
+	
+	if(tranparency>0){
+		tranparency= tranparency-0.2;
+	}
+	else{
+		tranparency=1;
+	}
 }
 
 //Learned to do from ajduberstien and the cinder samples Textbox and TextTest
@@ -182,7 +159,7 @@ void RoyalSocietyRGApp::render(){
 
 void RoyalSocietyRGApp::keyDown(KeyEvent event){
 	 if(event.getChar() == '?'){//got the idea from ajduberstien
-		help = true;
+		help = !help;
 	}
 	 else if(event.getCode() == event.KEY_t){
 		 transparent();
@@ -198,7 +175,11 @@ void RoyalSocietyRGApp::keyDown(KeyEvent event){
 		} 
 	else if( event.getCode() == event.KEY_LEFT ){
 		  	moveItemsLeft();
-		} 
+		}
+	else if( event.getCode() == event.KEY_r){
+
+		(*lst).reverse();
+	}
 		} 
 	
 	
@@ -212,9 +193,9 @@ void RoyalSocietyRGApp::mouseDown( MouseEvent event )
 
 void RoyalSocietyRGApp::update()
 {
-	 c = ColorA(0.0f, 0.0f,0.6f, T);
-	 c2 = ColorA(0.0f, 0.2f,0.6f, T);
-     c3 = ColorA(0.0f, 0.0f,0.9f, T);
+	 c = ColorA(0.0f, 0.0f,0.6f, tranparency);
+	 c2 = ColorA(0.0f, 0.2f,0.6f, tranparency);
+     c3 = ColorA(0.0f, 0.0f,0.9f, tranparency);
 
 	 oneRect_ =  new rectangle(c,startx,starty,width,width);
 	 twoRect_ = new rectangle(c2,startx+20,starty+20,width+20,height+20); 
@@ -226,24 +207,22 @@ void RoyalSocietyRGApp::update()
 	 two = new Node();
 	 three = new Node();
 	// after = new Node();
-
+	// console() << one << " " << two << " " << three <<endl;
 	//adds rectangles two nodes
 	one->data_= oneRect_;
 	two->data_= twoRect_;
 	three->data_= threeRect_;
 	//after->data_ = aftRect_;
 
-	//creates a list
-	lst =  new List();
 
 	//adds node
 
-	
+	//creates a list
+	lst =  new List();
+
 	lst->add(three);
 	lst->add(two);
 	lst->add(one);
-
-	
 }
 
 
@@ -263,7 +242,6 @@ void RoyalSocietyRGApp::draw()
 	if(help == true){
 		gl::draw(texture_font_);
 	}
-
 }
 
 CINDER_APP_BASIC( RoyalSocietyRGApp, RendererGl )
