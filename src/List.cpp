@@ -9,6 +9,7 @@ List::List()
 }
 
 //Adds a node at the end of the list right before it reaches the sentinal again.
+//borrowed from 274 class lecture
 void List::add(Node* toAdd){
 
 	toAdd -> prev_ = sentinal_-> prev_;
@@ -20,6 +21,7 @@ void List::add(Node* toAdd){
 }
 
 //inserts a new node named nw after the nw node.
+//borrowed from 274 class lecture
 void List::insertAfter(Node*where, Node*nw){
 
 	nw ->next_ = where->next_;
@@ -30,6 +32,7 @@ void List::insertAfter(Node*where, Node*nw){
 	}
 
 //Satifies requirement 
+//borrowed from 274 class lecture
 void List::reverse(){
 
 	Node* temp = sentinal_;
